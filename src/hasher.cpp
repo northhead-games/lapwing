@@ -65,18 +65,3 @@ u64 hashAsset(Hash hash, std::string name) {
 
 	return value;
 }
-
-std::string getBasename(std::string name) {
-	#if _WIN32
-	char fname[_MAX_FNAME];
-	_splitpath_s(name.c_str(), NULL, 0, NULL, 0, fname, _MAX_FNAME, NULL, 0);
-	std::string asset(fname);
-	#else
-	char* fname = basename(name.c_str());
-	std::string asset(fname);
-	size_t extensionIndex = asset.find_last_of(".");
-	if (extensionIndex != std::string::npos) asset = asset.substr(0, extensionIndex);
-	#endif
-
-	return asset;
-}

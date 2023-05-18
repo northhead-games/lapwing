@@ -2,7 +2,9 @@
 #include <fstream>
 #include <iostream>
 #include <map>
+
 #include "lapwing.h"
+#include "file_utils.h"
 
 struct Writer {
     std::ofstream* assets; 
@@ -13,11 +15,9 @@ struct Writer {
 
     void writeHash(Hash hash);
 
-    void writeTableOfContents(ToCElement* ToC);
+    void writeTableOfContents(Entry* ToC);
 
-    uintptr_t writeAsset(ToCElement& content, std::string path);
-
-    std::string getExtension(std::string path);
+    uintptr_t writeAsset(Entry& content, std::string path);
 
     ~Writer();
 };

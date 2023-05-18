@@ -21,34 +21,31 @@ typedef struct Hash {
 	size_t assetCount;
 } Hash;
 
+#define HASH_SIZE sizeof(Hash)
+
 enum assettype {
 	IMAGE,
 	MODEL,
 };
 
-typedef struct ToCElement {
+typedef struct Entry {
 	u64 hash;
-	assettype type;
 	uintptr_t offset;
 	uintptr_t size;
+	assettype type;
 
-	bool operator < (const ToCElement& comp) const {
+	bool operator < (const Entry& comp) const {
 		return (hash < comp.hash);
 	}
-} ToCElement;
+} Entry;
 
-typedef struct imageStruct {
+#define ENTRY_SIZE sizeof(Entry)
+
+typedef struct imageInfo {
 	int width;
 	int height;
 	int bitDepth;
-} imageStruct;
-
-enum vertexattrib {
-	POS = 1,
-	NORM = 2,
-	TAN = 4,
-	TEX = 8,
-};
+} imageInfo;
 
 typedef struct vec3 {
 	float x;
@@ -61,7 +58,14 @@ typedef struct vec2 {
 	float y;
 } vec2;
 
-typedef struct modelStruct {
+enum vertexAttrib {
+	POS = 1,
+	NORM = 2,
+	TAN = 4,
+	TEX = 8,
+};
+
+typedef struct modelInfo {
 	u64 vertexCount;
 	u8 vertexAttributes;
-} modelStruct;
+} modelInfo;
