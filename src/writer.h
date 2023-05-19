@@ -9,7 +9,7 @@
 struct Writer {
     std::ofstream* assets; 
     size_t ToCLength;
-    std::map<std::string, assettype> extensionsToType;
+    std::map<std::string, AssetType> extensionsToType;
 
     Writer(std::string filename, size_t assetCount);
 

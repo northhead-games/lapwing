@@ -1,5 +1,6 @@
 #pragma once
 #include <stdint.h>
+#include <functional>
 
 typedef uint64_t u64;
 typedef uint32_t u32;
@@ -14,58 +15,51 @@ typedef int8_t   i8;
 typedef double   f64;
 typedef float    f32;
 
-typedef struct Hash {
+struct Hash {
 	u32 prime;
 	u32 startChars;
 	u32 endChars;
 	size_t assetCount;
-} Hash;
+};
 
 #define HASH_SIZE sizeof(Hash)
 
-enum assettype {
+enum AssetType {
 	IMAGE,
 	MODEL,
 };
 
-typedef struct Entry {
+struct Entry {
 	u64 hash;
 	uintptr_t offset;
 	uintptr_t size;
-	assettype type;
+	AssetType type;
 
 	bool operator < (const Entry& comp) const {
 		return (hash < comp.hash);
 	}
-} Entry;
+
+	bool operator == (const Entry& other) const {
+		return (hash == other.hash);
+	}
+};
 
 #define ENTRY_SIZE sizeof(Entry)
 
-typedef struct imageInfo {
+struct ImageInfo {
 	int width;
 	int height;
 	int bitDepth;
-} imageInfo;
+};
 
-typedef struct vec3 {
-	float x;
-	float y;
-	float z;
-} vec3;
-
-typedef struct vec2 {
-	float x;
-	float y;
-} vec2;
-
-enum vertexAttrib {
+enum VertexAttrib {
 	POS = 1,
 	NORM = 2,
 	TAN = 4,
 	TEX = 8,
 };
 
-typedef struct modelInfo {
+struct ModelInfo {
 	u64 vertexCount;
 	u8 vertexAttributes;
-} modelInfo;
+};
