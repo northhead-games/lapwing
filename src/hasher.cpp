@@ -9,7 +9,7 @@ Hash findPerfectHash(std::vector<std::string> assets) {
 
 	while (true) {
 		std::set<u64> hashes;
-		for each (auto assetFull in assets) {
+		for (auto assetFull: assets) {
 			std::string asset = getBasename(assetFull);
 
 			u32 power = 1;
