@@ -1,7 +1,7 @@
 #include "writer.h"
 
 #define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
+#include "stb/stb_image.h"
 
 Writer::Writer(std::string filename, size_t assetCount) {
 	assets = new std::ofstream(filename, std::ofstream::out | std::ofstream::binary);
