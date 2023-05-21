@@ -44,9 +44,10 @@ uintptr_t Writer::writeAsset(Entry& content, std::string path) {
 			assets->write((char*)image, imageInfo.width * imageInfo.height * imageInfo.bitDepth);
 			stbi_image_free(image);
 			content.size = sizeof(ImageInfo) + imageInfo.width * imageInfo.height * imageInfo.bitDepth;
-			return content.offset + content.size;
+            int alignmentAmount = content.size % sizeof(ImageInfo) == 0 ? 0 : (sizeof(ImageInfo) - content.size % sizeof(ImageInfo));
+			return content.offset + content.size + (4 - content.size % 4);
 		} else {
-			std::cerr << "Asset file " << path << " does not exists." << std::endl;
+			std::cerr << "Asset file " << path << " does not exist." << std::endl;
 		}
 	}
 	return -1;

@@ -25,7 +25,7 @@ int main(int argc, char** argv) {
     Writer writer("assets.plv", hash.assetCount);
     writer.writeHash(hash);
 
-    uintptr_t offset = HASH_SIZE + sizeof(ENTRY_SIZE) * hash.assetCount;
+    uintptr_t offset = HASH_SIZE + ENTRY_SIZE * hash.assetCount;
     for (size_t i = 0; i < hash.assetCount; i++) {
         tableOfContents[i].hash = hashAsset(hash, assets[i]); 
         tableOfContents[i].offset = offset;        
